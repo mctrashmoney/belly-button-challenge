@@ -30,7 +30,7 @@ function buildCharts(sample) {
     const samples = data.samples;
 
     // Filter the samples for the object with the desired sample number
-    const result = samples.find((s) => s.id == sample);
+    const result = samples.find((s) => s.id == parseInt(sample));
 
     // Get the otu_ids, otu_labels, and sample_values
     const otu_ids = result.otu_ids;
@@ -59,7 +59,7 @@ function buildCharts(sample) {
     };
 
     // Render the Bubble Chart
-    Plotly.newPlot('bubble', bubbleChart, bubbleLayout);
+    Plotly.newPlot('bubble', [bubbleChart], bubbleLayout);
 
     // For the Bar Chart, map the otu_ids to a list of strings for y-ticks
     const yticks = otu_ids.slice(0, 10).map((id) => `OTU ${id}`).reverse();
