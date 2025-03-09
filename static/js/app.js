@@ -1,6 +1,6 @@
 // Build the metadata panel
 function buildMetadata(sample) {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
 
     // get the metadata field
     const metadata = data.metadata;
@@ -22,9 +22,9 @@ function buildMetadata(sample) {
   });
 }
 
-// function to build both charts
+// Function to build both charts
 function buildCharts(sample) {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
 
     // Get the samples field
     const samples = data.samples;
@@ -50,14 +50,21 @@ function buildCharts(sample) {
       }
     };
 
+    // Define Bubble Chart Layout
+    const bubbleLayout = {
+      title: "Bacteria Cultures Per Sample",
+      xaxis: { title: "OTU ID" },
+      yaxis: { title: "Sample Values" },
+      hovermode: "closest"
+    };
+
     // Render the Bubble Chart
     Plotly.newPlot('bubble', bubbleChart, bubbleLayout);
 
-    // For the Bar Chart, map the otu_ids to a list of strings for your yticks
+    // For the Bar Chart, map the otu_ids to a list of strings for y-ticks
     const yticks = otu_ids.slice(0, 10).map((id) => `OTU ${id}`).reverse();
 
     // Build a Bar Chart
-    // Don't forget to slice and reverse the input data appropriately
     const barChart = {
       x: sample_values.slice(0, 10).reverse(),
       y: yticks,
@@ -66,14 +73,21 @@ function buildCharts(sample) {
       orientation: 'h'
     };
 
+    // Define Bar Chart Layout
+    const barLayout = {
+      title: "Top 10 OTUs Found",
+      xaxis: { title: "Sample Values" },
+      yaxis: { title: "OTU ID" }
+    };
+
     // Render the Bar Chart
-    Plotly.newPlot('bar', barChart, barLayout);
+    Plotly.newPlot('bar', [barChart], barLayout);
   });
 }
 
 // Function to run on page load
 function init() {
-  d3.json("https://static.bc-edx.com/data/dl-1-2/m14/lms/starter/samples.json").then((data) => {
+  d3.json("samples.json").then((data) => {
 
     // Get the names field
     const names = data.names;
