@@ -70,7 +70,8 @@ function buildCharts(sample) {
       y: yticks,
       text: otu_labels.slice(0, 10).reverse(),
       type: 'bar',
-      orientation: 'h'
+      orientation: 'h',
+      textposition: 'none'
     };
 
     // Define Bar Chart Layout
