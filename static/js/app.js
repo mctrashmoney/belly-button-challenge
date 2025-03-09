@@ -1,7 +1,6 @@
 // Build the metadata panel
 function buildMetadata(sample) {
   d3.json("samples.json").then((data) => {
-
     // get the metadata field
     const metadata = data.metadata;
 
@@ -25,7 +24,6 @@ function buildMetadata(sample) {
 // Function to build both charts
 function buildCharts(sample) {
   d3.json("samples.json").then((data) => {
-
     // Get the samples field
     const samples = data.samples;
 
@@ -68,10 +66,9 @@ function buildCharts(sample) {
     const barChart = {
       x: sample_values.slice(0, 10).reverse(),
       y: yticks,
-      text: otu_labels.slice(0, 10).reverse(),
+      hovertext: otu_labels.slice(0, 10).reverse(),
       type: 'bar',
-      orientation: 'h',
-      textposition: 'none'
+      orientation: 'h'
     };
 
     // Define Bar Chart Layout
@@ -89,7 +86,6 @@ function buildCharts(sample) {
 // Function to run on page load
 function init() {
   d3.json("samples.json").then((data) => {
-
     // Get the names field
     const names = data.names;
 
@@ -97,8 +93,6 @@ function init() {
     const dropdown = d3.select("#selDataset");
 
     // Use the list of sample names to populate the select options
-    // Hint: Inside a loop, you will need to use d3 to append a new
-    // option for each sample name.
     names.forEach((name) => {
       dropdown.append("option").text(name).property("value", name);
     });
